@@ -107,7 +107,7 @@ function wptouch_tags_link() {
 	}
 
 function wptouch_cats_link() {
-		echo '<a href="#head-cats">' . __( "Categories", "wptouch" ) . '</a>';
+		echo '<a href="#head-cats">' . __( "Topics", "wptouch" ) . '</a>';
 }
   
 function bnc_get_ordered_cat_list( $num ) {
