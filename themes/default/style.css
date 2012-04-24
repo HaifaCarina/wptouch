@@ -187,7 +187,7 @@ blockquote {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	width: 85%;
+        width: 85%;
 	font-weight: bold;
 	height: 29px;
 }

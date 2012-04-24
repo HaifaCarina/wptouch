@@ -221,9 +221,9 @@
 					</div>	
 				<?php } ?>
 
-	<?php } ?>
+	<?php } //echo "123456789012345678901234567890123456789012345678901234567890";?>
  
-	<a class="h2" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+	<a class="h2" href="<?php the_permalink(); ?>"><?php  the_title();?></a>
         
         	<!--<div class="post-author">
 		<?php /*if ($wptouch_settings['post-cal-thumb'] != 'calendar-icons') { ?><span class="lead"><?php _e("Written on", "wptouch"); ?></span> <?php echo get_the_time('d.m.Y') ?> <?php _e("at", "wptouch"); ?> <?php echo get_the_time('G:i') ?><br /><?php if (!bnc_show_author()) { echo '<br />';} ?><?php } ?>
