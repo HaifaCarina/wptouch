@@ -96,6 +96,9 @@
                     "wtf_media_categories" => $media_category_slug,
                     "posts_per_page" => 5
             ));
+            $wplogger->log($result);
+            $wplogger->log($media_category_slug);
+            
             watchAndListenMenu();
             $wplogger->log("watch-and-listen2 is called");
         }
