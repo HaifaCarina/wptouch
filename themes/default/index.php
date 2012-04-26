@@ -19,11 +19,13 @@
 	<?php 
 	
 	$wplogger->log("index.php is called");
-        
+        $wplogger->log("current_url:".$current_url);
+        $wplogger->log("watch_and_listen_url:".$watch_and_listen_url);
 	if (strcasecmp($current_url,$ask_jess_url)==0) {
             /**
                Note: If ASK JESS page, display only posts from columns post type
             **/	
+                $wplogger->log("ask-jess is called");
                 $result = query_posts(array(
 				"post_type" => "ask-jess" 
 		));     
@@ -32,6 +34,7 @@
             /**
                Note: If COLUMNS page, display only posts from columns post type
             **/	
+                $wplogger->log("columns is called");
                 $result = query_posts(array(
 				"post_type" => "columns" 
 		));     
@@ -40,6 +43,7 @@
             /**
                Note: If GUEST BLOGS page, display only posts from columns post type
             **/	
+                $wplogger->log("guest-blogs is called");
                 $result = query_posts(array(
 				"post_type" => "guest-blogs" 
 		));     
@@ -51,7 +55,7 @@
             /**
                 Note: If GLOSSARY page, display only posts from columns post type
             **/
-            
+            $wplogger->log("glossary is called");
             $result = query_posts(array(
                     "post_type" => "glossary",
                     "posts_per_page" => 11
@@ -60,10 +64,10 @@
             
             glossaryMenu();
             
-
+            
         } else if (strcasecmp($current_url,$watch_and_listen_url)==0) {
 
-            
+            $wplogger->log("watch-and-listen1 is called");
             $default_place = "";
             $media_category_slug = $_GET['place'] ? $_GET['place'] : $default_place;
             
@@ -93,9 +97,11 @@
                     "posts_per_page" => 5
             ));
             watchAndListenMenu();
+            $wplogger->log("watch-and-listen2 is called");
         }
         
         if (strstr($current_url,"glossary-category") ) {
+            $wplogger->log("glossary2 is called");
             glossaryMenu();
         }
         
@@ -221,7 +227,7 @@
 					</div>	
 				<?php } ?>
 
-	<?php } //echo "123456789012345678901234567890123456789012345678901234567890";?>
+	<?php } ?>
  
 	<a class="h2" href="<?php the_permalink(); ?>"><?php  the_title();?></a>
         
@@ -244,7 +250,7 @@
 
 	<div id="call<?php echo md5($_SERVER['REQUEST_URI']); ?>" class="ajax-load-more">
 		<div id="spinner<?php echo md5($_SERVER['REQUEST_URI']); ?>" class="spin"	 style="display:none"></div>
-		<a class="ajax" href="javascript:return false;" onclick="$wpt('#spinner<?php echo md5($_SERVER['REQUEST_URI']); ?>').fadeIn(200); $wpt('#ajaxentries<?php echo md5($_SERVER['REQUEST_URI']); ?>').load('<?php echo get_next_posts_page_link();  ?>', {}, function(){ $wpt('#call<?php echo md5($_SERVER['REQUEST_URI']); ?>').fadeOut();});">
+		<a class="ajax" href="javascript:return false;" onclick="$wpt('#spinner<?php echo md5($_SERVER['REQUEST_URI']); ?>').fadeIn(200); $wpt('#ajaxentries<?php echo md5($_SERVER['REQUEST_URI']); ?>').load('<?php echo get_next_posts_page_link(); ?>', {}, function(){ $wpt('#call<?php echo md5($_SERVER['REQUEST_URI']); ?>').fadeOut();});">
 			<?php _e( "Load more entries...", "wptouch" ); ?>
 		</a>
 	</div>

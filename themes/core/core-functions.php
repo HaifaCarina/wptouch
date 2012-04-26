@@ -33,8 +33,8 @@ function additional_header_menu_items() {
 	//echo sprintf(__( "%sColumns%s", "wptouch" ), '<li><a href="'.esc_url( home_url( '/?post_type=columns' ) ).'"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
 	echo sprintf(__( "%sColumns%s", "wptouch" ), '<li><a href="'.esc_url( home_url( '/columns/' ) ).'"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
 	echo sprintf(__( "%sGuest Blog%s", "wptouch" ), '<li><a href="'.esc_url( home_url( '/guest-blogs/' ) ).'"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
-	echo sprintf(__( "%sShare & Vote%s", "wptouch" ), '<li><a href="http://wtfstage.shazamm.net/share-and-vote/"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
-	echo sprintf(__( "%sWatch & Listen%s", "wptouch" ), '<li><a href="http://wtfstage.shazamm.net/watch-and-listen/"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
+	echo sprintf(__( "%sShare & Vote%s", "wptouch" ), '<li><a href="http://wtfisupwithmylovelife.com/share-and-vote/"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
+	echo sprintf(__( "%sWatch & Listen%s", "wptouch" ), '<li><a href="http://wtfisupwithmylovelife.com/watch-and-listen/"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
 	echo sprintf(__( "%sWTF!? 101 %s", "wptouch" ), '<li><a href="'.esc_url( home_url( '/glossary/' ) ).'"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
 	echo sprintf(__( "%sGet Involved%s", "wptouch" ), '<li><a href="'.esc_url( home_url( '/events-calendar/' ) ).'"><img src="' . bnc_get_title_image() . '" alt=""/>','</a></li>');
 }

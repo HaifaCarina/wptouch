@@ -1,5 +1,5 @@
 <?php
-
+$wplogger->log("share-and-vote is called");
 function shareAndVote ($link) {
     $share_and_vote_url = esc_url( home_url() )."/share-and-vote/";
     
