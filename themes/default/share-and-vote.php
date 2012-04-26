@@ -234,12 +234,12 @@ function shareAndVote ($link) {
 					</div>	
 				<?php } ?>
 
-	<a class="h2" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        <a class="h2" href="<?php the_permalink(); ?>" style="text-overflow: clip;white-space: normal;overflow: visible;"><?php the_title(); ?></a>
 		<div class="post-author">
 		<?php if ($wptouch_settings['post-cal-thumb'] != 'calendar-icons') { ?><span class="lead"><?php _e("Written on", "wptouch"); ?></span> <?php echo get_the_time('d.m.Y') ?> <?php _e("at", "wptouch"); ?> <?php echo get_the_time('G:i') ?><br /><?php if (!bnc_show_author()) { echo '<br />';} ?><?php } ?>
-			<!--<?php /*if (bnc_show_author()) { ?><span class="lead"><?php _e("By", "wptouch"); ?></span> <?php the_author(); ?><br /><?php } */?>
-			-->
-                        <?php /*if (bnc_show_categories()) { echo('<span class="lead">' . __( 'Categories', 'wptouch' ) . ':</span> '); the_category(', '); echo('<br />'); } */ ?> 
+			<?php if (bnc_show_author()) { ?><span class="lead"><?php _e("By", "wptouch"); ?></span> <?php the_author(); ?><br /><?php } ?>
+			
+                        <?php if (bnc_show_categories()) { echo('<span class="lead">' . __( 'Categories', 'wptouch' ) . ':</span> '); the_category(', '); echo('<br />'); }  ?> 
 			<?php if (bnc_show_tags() && get_the_tags()) { the_tags('<span class="lead">' . __( 'Tags', 'wptouch' ) . ':</span> ', ', ', ''); } ?>
 		</div>	
 			<div class="clearer"></div>	
@@ -248,7 +248,6 @@ function shareAndVote ($link) {
  		    <a class="read-more" href="<?php the_permalink() ?>"><?php _e( "Read This Post", "wptouch" ); ?></a>
                 </div>  
       </div>
-
     <?php endwhile; ?>	
 
 <!-- #End post -->
