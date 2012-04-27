@@ -15,7 +15,9 @@
 
 <div class="content" id="content<?php echo md5($_SERVER['REQUEST_URI']); ?>">
 	
-	
+    <script> 
+        alert("hell")
+</script>	
 	<?php 
 	
 	$wplogger->log("index.php is called");
@@ -27,7 +29,8 @@
             **/	
                 $wplogger->log("ask-jess is called");
                 $result = query_posts(array(
-				"post_type" => "ask-jess" 
+				"post_type" => "ask-jess", 
+                                'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
                 
 	} else if (strcasecmp($current_url,$columns_url)==0) {
@@ -36,7 +39,8 @@
             **/	
                 $wplogger->log("columns is called");
                 $result = query_posts(array(
-				"post_type" => "columns" 
+				"post_type" => "columns",
+                                'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
 		
 	} else if (strcasecmp($current_url,$guest_blogs_url)==0) {
@@ -45,7 +49,8 @@
             **/	
                 $wplogger->log("guest-blogs is called");
                 $result = query_posts(array(
-				"post_type" => "guest-blogs" 
+				"post_type" => "guest-blogs" ,
+                                'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
 		
                 
@@ -58,7 +63,8 @@
             $wplogger->log("glossary is called");
             $result = query_posts(array(
                     "post_type" => "glossary",
-                    "posts_per_page" => 11
+                    "posts_per_page" => 11,
+                    'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
                 
             ));
             
@@ -73,14 +79,16 @@
             
             $result = query_posts(array(
                     "post_type" => "watch-and-listen",
-                    "posts_per_page" => 5
+                    "posts_per_page" => 5,
+                    'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
             ));
             watchAndListenMenu();
       
            
 	} else {
             query_posts(array(
-				"post_type" => array("columns","guest-blogs","ask-jess") 
+				"post_type" => array("columns","guest-blogs","ask-jess") ,
+                                'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
         }    
         
@@ -94,7 +102,8 @@
             $result = query_posts(array(
                     "post_type" => "watch-and-listen",
                     "wtf_media_categories" => $media_category_slug,
-                    "posts_per_page" => 5
+                    "posts_per_page" => 5,
+                    'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
             ));
             $wplogger->log($result);
             $wplogger->log($media_category_slug);
