@@ -2,12 +2,7 @@
 <?php global $wplogger;  
     $displayed = false;
     $current_url = "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI'];
-	$watch_and_listen_url = esc_url( home_url() )."/watch-and-listen/";
-	$share_and_vote_url = esc_url( home_url() )."/share-and-vote/";
-        $glossary_url = esc_url( home_url() )."/glossary/";
-	$columns_url = esc_url( home_url() )."/columns/";
-	$ask_jess_url = esc_url( home_url() )."/ask-jess/";
-        $guest_blogs_url = esc_url ( home_url() )."/guest-blogs/";
+        
 ?>
 <?php global $is_ajax; $is_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']); if (!$is_ajax) get_header(); ?>
 <?php $wptouch_settings = bnc_wptouch_get_settings(); ?>
@@ -21,7 +16,13 @@
 	$wplogger->log("index.php is called");
         $wplogger->log("current_url:".$current_url);
         $wplogger->log("watch_and_listen_url:".$watch_and_listen_url);
-	if (strcasecmp($current_url,$ask_jess_url)==0) {
+        
+        if (strpos($current_url, "ask-jess")== true){
+            $wplogger->log("function is working ASK-JESS");
+        }
+        
+	
+        if (strpos($current_url, "ask-jess")== true){    
             /**
                Note: If ASK JESS page, display only posts from columns post type
             **/	
@@ -31,7 +32,7 @@
                                 'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
                 
-	} else if (strcasecmp($current_url,$columns_url)==0) {
+	} else if (strpos($current_url, "columns")== true){ 
             /**
                Note: If COLUMNS page, display only posts from columns post type
             **/	
@@ -41,7 +42,7 @@
                                 'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
 		
-	} else if (strcasecmp($current_url,$guest_blogs_url)==0) {
+	} else if (strpos($current_url, "guest-blogs")== true){
             /**
                Note: If GUEST BLOGS page, display only posts from columns post type
             **/	
@@ -54,7 +55,7 @@
                 
                 
                 
-	} else if (strcasecmp($current_url,$glossary_url)==0) {
+	} else if (strpos($current_url, "glossary")== true){
             /**
                 Note: If GLOSSARY page, display only posts from columns post type
             **/
@@ -69,7 +70,7 @@
             glossaryMenu();
             
             
-        } else if (strcasecmp($current_url,$watch_and_listen_url)==0) {
+        } else if (strpos($current_url, "watch-and-listen")== true){
 
             $wplogger->log("watch-and-listen1 is called");
             $default_place = "";
