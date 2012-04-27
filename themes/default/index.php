@@ -17,10 +17,16 @@
         $wplogger->log("current_url:".$current_url);
         $wplogger->log("watch_and_listen_url:".$watch_and_listen_url);
         
-        if (strpos($current_url, "ask-jess")== true){
-            $wplogger->log("function is working ASK-JESS");
-        }
         
+        if (is_search()){
+             $wplogger->log("searching");
+        } else {
+            //$wplogger->log("not searching");
+            query_posts(array(
+				"post_type" => array("columns","guest-blogs","ask-jess") ,
+                                'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
+		)); 
+        }
 	
         if (strpos($current_url, "ask-jess")== true){    
             /**
@@ -84,12 +90,12 @@
             watchAndListenMenu();
       
            
-	} else {
+	} /*else if (strcasecmp($current_url,"http://wtfisupwithmylovelife.com/")==0){
             query_posts(array(
 				"post_type" => array("columns","guest-blogs","ask-jess") ,
                                 'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
 		));     
-        }    
+        } */    
         
         
         if (strstr($current_url,"watch-and-listen") && $_GET['place']) {
@@ -116,7 +122,9 @@
             glossaryMenu();
         }
         
-
+        
+        
+            
         
         ?>
             
@@ -138,7 +146,8 @@
 		<?php } ?>
  	
  	<?php if (is_archive() || is_search()) { ?>
-		<div class="archive-top">
+     
+		<div class="archive-top"> 
 			<div class="archive-top-right">
 				<?php if (bnc_excerpt_enabled()) { ?>
 				<script type="text/javascript">
