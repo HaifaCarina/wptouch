@@ -15,9 +15,7 @@
 
 <div class="content" id="content<?php echo md5($_SERVER['REQUEST_URI']); ?>">
 	
-    <script> 
-        alert("hell")
-</script>	
+    	
 	<?php 
 	
 	$wplogger->log("index.php is called");
