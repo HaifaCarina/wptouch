@@ -7,7 +7,6 @@
     if (!$is_ajax) get_header(); ?>
 <?php $wptouch_settings = bnc_wptouch_get_settings(); 
 
-    //$wplogger->log(the_post());
 ?>
 
 <div class="content single" id="content<?php //echo md5($_SERVER['REQUEST_URI']); ?>">
@@ -120,3 +119,28 @@ $wpt('#commentform').ajaxForm(formoptions);
 	
 <?php global $is_ajax; if (!$is_ajax) 
 get_footer();
+
+function Xbnc_get_ordered_cat_list( $num ) {
+	global $wpdb;
+
+	if (  wptouch_excluded_cats() ) {
+		$excluded_cats = wptouch_excluded_cats();
+	} else {
+		$excluded_cats = 0;	
+	}
+
+	echo '<ul>';
+	$sql = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}term_taxonomy INNER JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id = {$wpdb->prefix}terms.term_id WHERE taxonomy = 'category' AND {$wpdb->prefix}term_taxonomy.term_id NOT IN ($excluded_cats) AND count >= 1 ORDER BY name ASC LIMIT 0, $num");
+
+	if ( $sql ) {
+		foreach ( $sql as $result ) {
+			if ( $result ) { //
+				echo "<li><a href=\"" . get_category_link( $result->term_id ) . "\">" . $result->name . " <span>(" . $result->count . ")</span></a></li>"; 			
+			}
+		}
+	}
+	echo '</ul>';
+}
+
+    $wplogger->log("post-id".$post->ID);
+    Xbnc_get_ordered_cat_list(10);

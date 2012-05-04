@@ -90,7 +90,21 @@
             watchAndListenMenu();
       
            
-	} /*else if (strcasecmp($current_url,"http://wtfisupwithmylovelife.com/")==0){
+	} else if (strpos($current_url, "category/after-the-fashion/")== true){    
+            /**
+               Note: If after-the-fashion page, display only posts from after-the-fashion post type
+            **/	
+                $wplogger->log("category/after-the-fashion/ is called");
+                
+                $result = query_posts( 'cat=1589&post_type=columns' );
+                $wplogger->log($result);
+                
+                
+            
+                
+	} 
+        
+        /*else if (strcasecmp($current_url,"http://wtfisupwithmylovelife.com/")==0){
             query_posts(array(
 				"post_type" => array("columns","guest-blogs","ask-jess") ,
                                 'paged' => ( get_query_var('paged') ? get_query_var('paged') : 1),
@@ -379,6 +393,7 @@ function glossaryMenu () {
 <?php
     
 }
+
 
 
 ?>
