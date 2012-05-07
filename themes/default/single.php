@@ -39,9 +39,22 @@
 <!-- Categories and Tags post footer -->        
 
 			<div class="single-post-meta-bottom">
-					<?php wp_link_pages( 'before=<div class="post-page-nav">' . __( "Article Pages", "wptouch-pro" ) . ':&after=</div>&next_or_number=number&pagelink=page %&previouspagelink=&raquo;&nextpagelink=&laquo;' ); ?>          
+					<?php /*wp_link_pages( 'before=<div class="post-page-nav">' . __( "Article Pages", "wptouch-pro" ) . ':&after=</div>&next_or_number=number&pagelink=page %&previouspagelink=&raquo;&nextpagelink=&laquo;' ); ?>          
 			    <?php _e( "Categories", "wptouch" ); ?>: <?php if (the_category(', ')) the_category(); ?>
-			    <?php if (function_exists('get_the_tags')) the_tags('<br />' . __( 'Tags', 'wptouch' ) . ': ', ', ', ''); ?>  
+			    <?php if (function_exists('get_the_tags')) the_tags('<br />' . __( 'Tags', 'wptouch' ) . ': ', ', ', ''); */?>  
+                            
+                    <?php 
+                        _e( "Topics: ", "wptouch" );
+                        $counter = 0;
+                        foreach((get_the_category()) as $category) { 
+                            echo '<a href="'.get_category_link($category->term_id ).'">'.$category->cat_name.'</a>';
+                            if ($counter != (count(get_the_category())-1)){
+                                echo ", ";
+                            }
+                            $counter++;
+                            
+                        } 
+                    ?>         
 		    </div>   
 
 		<ul id="post-options">
