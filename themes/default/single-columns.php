@@ -1,6 +1,6 @@
 <?php
     global $wplogger;
-    $wplogger->log('single.php is called');
+    $wplogger->log('single-columns.php is called');
 ?>
 <?php global $is_ajax; 
     $is_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']); 
@@ -46,9 +46,23 @@
 <!-- Categories and Tags post footer -->        
 
 			<div class="single-post-meta-bottom">
-					<?php wp_link_pages( 'before=<div class="post-page-nav">' . __( "Article Pages", "wptouch-pro" ) . ':&after=</div>&next_or_number=number&pagelink=page %&previouspagelink=&raquo;&nextpagelink=&laquo;' ); ?>          
+					<?php /*wp_link_pages( 'before=<div class="post-page-nav">' . __( "Article Pages", "wptouch-pro" ) . ':&after=</div>&next_or_number=number&pagelink=page %&previouspagelink=&raquo;&nextpagelink=&laquo;' ); ?>          
 			    <?php _e( "Categories", "wptouch" ); ?>: <?php if (the_category(', ')) the_category(); ?>
-			    <?php if (function_exists('get_the_tags')) the_tags('<br />' . __( 'Tags', 'wptouch' ) . ': ', ', ', ''); ?>  
+                            
+			    <?php if (function_exists('get_the_tags')) the_tags('<br />' . __( 'Tags', 'wptouch' ) . ': ', ', ', ''); */?>
+                            
+                     <?php 
+                        _e( "Topics: ", "wptouch" );
+                        $counter = 0;
+                        foreach((get_the_category()) as $category) { 
+                            echo '<a href="'.get_category_link($category->term_id ).'">'.$category->cat_name.'</a>';
+                            if ($counter != (count(get_the_category())-1)){
+                                echo ", ";
+                            }
+                            $counter++;
+                            
+                        } 
+                    ?>       
 		    </div>   
 
 
@@ -120,27 +134,3 @@ $wpt('#commentform').ajaxForm(formoptions);
 <?php global $is_ajax; if (!$is_ajax) 
 get_footer();
 
-function Xbnc_get_ordered_cat_list( $num ) {
-	global $wpdb;
-
-	if (  wptouch_excluded_cats() ) {
-		$excluded_cats = wptouch_excluded_cats();
-	} else {
-		$excluded_cats = 0;	
-	}
-
-	echo '<ul>';
-	$sql = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}term_taxonomy INNER JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id = {$wpdb->prefix}terms.term_id WHERE taxonomy = 'category' AND {$wpdb->prefix}term_taxonomy.term_id NOT IN ($excluded_cats) AND count >= 1 ORDER BY name ASC LIMIT 0, $num");
-
-	if ( $sql ) {
-		foreach ( $sql as $result ) {
-			if ( $result ) { //
-				echo "<li><a href=\"" . get_category_link( $result->term_id ) . "\">" . $result->name . " <span>(" . $result->count . ")</span></a></li>"; 			
-			}
-		}
-	}
-	echo '</ul>';
-}
-
-    $wplogger->log("post-id".$post->ID);
-    Xbnc_get_ordered_cat_list(10);
