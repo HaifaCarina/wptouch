@@ -90,17 +90,15 @@
             watchAndListenMenu();
       
            
-	} else if (strpos($current_url, "category/after-the-fashion/")== true){    
+	} else if (strpos($current_url, "/category/")== true){    
             /**
                Note: If after-the-fashion page, display only posts from after-the-fashion post type
             **/	
-                $wplogger->log("category/after-the-fashion/ is called");
-                
-                $result = query_posts( 'cat=1589&post_type=columns' );
-                $wplogger->log($result);
-                
-                
+            $wplogger->log("category/after-the-fashion/ is called");
             
+            $cat_array = explode("/",$current_url);
+            $term = get_term_by('slug', $cat_array[4], 'category');
+            $result = query_posts('cat='.$term->term_id.'&post_type=columns' );
                 
 	} 
         
